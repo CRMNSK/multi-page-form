@@ -336,7 +336,7 @@ function submitActivityForm() {
 }
 
 function sendDataToBackend(formData) {
-    fetch('YOUR_GOOGLE_APP_SCRIPT_WEB_APP_URL', {
+    fetch('https://script.google.com/macros/s/AKfycbyFZc5WqEyenQIrng8dTn2uDs2K59qKNk2YeT0Xkk-nF6TqNLOUjtjMSuIa9Ci-qZkK/exec', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
