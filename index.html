@@ -10,359 +10,283 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f7fc;
+            background-color: #f4f4f9;
             color: #333;
         }
 
-        h2, h3 {
-            color: #4CAF50;
+        h1, h2 {
+            color: #2c3e50;
+            font-size: 24px;
             text-align: center;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-page {
-            display: none;
-        }
-
-        .form-page.active {
-            display: block;
-        }
-
-        label {
-            font-weight: bold;
-            margin-top: 10px;
-            display: block;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .success-message {
-            color: #4CAF50;
-            font-size: 18px;
-            text-align: center;
-        }
-
-        /* Mobile Responsive Styles */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-                margin: 10px;
-            }
-            button {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            label {
-                font-size: 14px;
-            }
-
-            input, select, textarea {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            button {
-                font-size: 15px;
-            }
-        }
-
-        /* Custom Styling for Form Sections */
-        .form-section {
             margin-bottom: 20px;
         }
 
-        .form-section input[type="text"],
-        .form-section input[type="email"],
-        .form-section input[type="date"],
-        .form-section input[type="time"],
-        .form-section textarea {
-            border-radius: 4px;
+        h3 {
+            color: #2c3e50;
+            font-size: 18px;
         }
 
-        .form-section select {
-            border-radius: 4px;
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .form-section button {
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container button,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 16px;
+        }
+
+        .form-container button {
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            border: none;
+            font-weight: bold;
+        }
+
+        .form-container button:hover {
+            background-color: #2980b9;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-container textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-container input:focus,
+        .form-container select:focus,
+        .form-container textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .form-container .success-message {
+            color: #2ecc71;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .form-container .search-results ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .form-container .search-results li {
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .form-container .search-results li:hover {
+            background-color: #bdc3c7;
+            cursor: pointer;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            h1, h2 {
+                font-size: 20px;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            .form-container input,
+            .form-container select,
+            .form-container button,
+            .form-container textarea {
+                font-size: 14px;
+                padding: 12px;
+            }
+
+            .form-container .success-message {
+                font-size: 16px;
+            }
+        }
+
+        /* Mobile Friendly */
+        @media (max-width: 480px) {
+            h1, h2 {
+                font-size: 18px;
+            }
+
+            .form-container {
+                padding: 10px;
+            }
+
+            .form-container input,
+            .form-container select,
+            .form-container button,
+            .form-container textarea {
+                font-size: 12px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Main Container for Form -->
-<div class="container">
+    <div class="container">
+        <h1>Search or Add Data</h1>
 
-    <!-- Page 1: Search and Form Selection -->
-    <div id="page1" class="form-page active">
-        <h2>Search and Select Type</h2>
-        <div class="form-section">
-            <label for="search">Search Existing Data:</label>
-            <input type="text" id="search" placeholder="Enter Company or Person name">
-        </div>
-        <div class="form-section">
-            <label for="selection">Select Form Type:</label>
-            <select id="selection" onchange="handleSelectionChange()">
-                <option value="">Select</option>
-                <option value="company">Company</option>
-                <option value="person">Person</option>
-            </select>
-        </div>
-        <button onclick="goToPage2()">Next</button>
-    </div>
-
-    <!-- Page 2: Company Form -->
-    <div id="companyForm" class="form-page">
-        <h2>Company Form</h2>
-        <form id="companyFormData">
-            <div class="form-section">
-                <label for="companyName">Company Name:</label>
-                <input type="text" id="companyName" required>
-            </div>
-            <div class="form-section">
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="text" id="phoneNumber" required>
-            </div>
-            <div class="form-section">
-                <label for="street">Street:</label>
-                <input type="text" id="street" required>
-            </div>
-            <div class="form-section">
-                <label for="city">City:</label>
-                <input type="text" id="city" required>
-            </div>
-            <div class="form-section">
-                <label for="emirates">Emirates:</label>
-                <input type="text" id="emirates" required>
-            </div>
-            <div class="form-section">
-                <label for="website">Website:</label>
-                <input type="text" id="website" required>
-            </div>
-            <div class="form-section">
-                <label for="email">Email:</label>
-                <input type="email" id="email" required>
-            </div>
-            <button type="button" onclick="submitFormData('company')">Submit</button>
-        </form>
-    </div>
-
-    <!-- Page 3: Person Form -->
-    <div id="personForm" class="form-page">
-        <h2>Person Form</h2>
-        <form id="personFormData">
-            <div class="form-section">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required>
-            </div>
-            <div class="form-section">
-                <label for="personCompanyName">Company Name:</label>
-                <input type="text" id="personCompanyName" required>
-            </div>
-            <div class="form-section">
-                <label for="mobileNumber">Mobile Number:</label>
-                <input type="text" id="mobileNumber" required>
-            </div>
-            <div class="form-section">
-                <label for="personEmail">Email:</label>
-                <input type="email" id="personEmail" required>
-            </div>
-            <div class="form-section">
-                <label for="whatsapp">WhatsApp:</label>
-                <input type="text" id="whatsapp" required>
-            </div>
-            <div class="form-section">
-                <label for="designation">Designation:</label>
-                <input type="text" id="designation" required>
-            </div>
-            <div class="form-section">
-                <label for="department">Department:</label>
-                <input type="text" id="department" required>
-            </div>
-            <button type="button" onclick="submitFormData('person')">Submit</button>
-        </form>
-    </div>
-
-    <!-- Page 4: Activity Form -->
-    <div id="activityForm" class="form-page">
-        <h2>Activity Form</h2>
-        <form id="activityFormData">
-            <div class="form-section">
-                <label for="activityType">Activity Type:</label>
-                <select id="activityType" required>
-                    <option value="Call">Call</option>
-                    <option value="Email">Email</option>
-                    <option value="Site Visit">Site Visit</option>
-                    <option value="Office Visit">Office Visit</option>
-                    <option value="Meeting">Meeting</option>
+        <!-- Search Form -->
+        <div class="form-container">
+            <form id="search-form">
+                <label for="type">Select Type:</label>
+                <select id="type" name="type">
+                    <option value="company">Company</option>
+                    <option value="person">Person</option>
                 </select>
+
+                <label for="search-input">Search:</label>
+                <input type="text" id="search-input" name="query" placeholder="Enter name or company" required>
+
+                <button type="submit">Search</button>
+            </form>
+        </div>
+
+        <!-- Search Results -->
+        <div id="search-result-container" class="form-container" style="display: none;">
+            <h3>Results:</h3>
+            <div class="search-results">
+                <ul id="search-results-list"></ul>
             </div>
-            <div class="form-section">
-                <label for="date">Date:</label>
-                <input type="date" id="date" required>
-            </div>
-            <div class="form-section">
-                <label for="time">Time:</label>
-                <input type="time" id="time" required>
-            </div>
-            <div class="form-section">
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" required>
-            </div>
-            <div class="form-section">
-                <label for="actionPlan">Action Plan:</label>
-                <textarea id="actionPlan" required></textarea>
-            </div>
-            <div class="form-section">
-                <label for="result">Result:</label>
-                <textarea id="result" required></textarea>
-            </div>
-            <div class="form-section">
-                <label for="followUpDate">Follow Up Date:</label>
-                <input type="date" id="followUpDate" required>
-            </div>
-            <button type="button" onclick="submitActivityForm()">Submit</button>
-        </form>
+            <button id="new-entry-btn">Create New Entry</button>
+        </div>
+
+        <!-- Data Entry Form -->
+        <div id="form-container" class="form-container" style="display: none;">
+            <h2 id="form-header"></h2>
+            <form id="entry-form">
+                <input type="hidden" id="form-type" name="type">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="company">Company Name:</label>
+                <input type="text" id="company" name="company">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone">
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address"></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="form-container" style="display: none;">
+            <p class="success-message">Form submitted successfully!</p>
+        </div>
     </div>
 
-    <!-- Success Message -->
-    <div id="successMessage" class="form-page">
-        <h3 class="success-message">Form submitted successfully!</h3>
-        <button onclick="goToPage1()">Register Another Entry</button>
-    </div>
+    <script>
+        const formContainer = document.getElementById('form-container');
+        const searchResultContainer = document.getElementById('search-result-container');
+        const searchResultsList = document.getElementById('search-results-list');
+        const successMessage = document.getElementById('success-message');
+        const searchForm = document.getElementById('search-form');
+        const entryForm = document.getElementById('entry-form');
+        const newEntryBtn = document.getElementById('new-entry-btn');
+        const formHeader = document.getElementById('form-header');
+        
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchQuery = document.getElementById('search-input').value;
+            const selectedType = document.getElementById('type').value;
+            searchData(selectedType, searchQuery);
+        });
 
-</div>
+        newEntryBtn.addEventListener('click', function() {
+            formContainer.style.display = 'block';
+            searchResultContainer.style.display = 'none';
+            formHeader.textContent = 'Enter New Data';
+            document.getElementById('form-type').value = document.getElementById('type').value;
+            resetForm();
+        });
 
-<script>
-// Handle page transitions
-function goToPage1() {
-    resetAllForms();
-    document.getElementById("page1").classList.add("active");
-}
+        entryForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(entryForm);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
 
-function goToPage2() {
-    const selection = document.getElementById("selection").value;
-    if (selection === "company") {
-        document.getElementById("companyForm").classList.add("active");
-    } else if (selection === "person") {
-        document.getElementById("personForm").classList.add("active");
-    }
-    document.getElementById("page1").classList.remove("active");
-}
+            const sheetName = document.getElementById('form-type').value === 'company' ? 'companies' : 'people';
+            submitData(sheetName, data);
+        });
 
-// Reset all form data
-function resetAllForms() {
-    document.getElementById("companyFormData").reset();
-    document.getElementById("personFormData").reset();
-    document.getElementById("activityFormData").reset();
-    document.getElementById("companyForm").classList.remove("active");
-    document.getElementById("personForm").classList.remove("active");
-    document.getElementById("activityForm").classList.remove("active");
-}
+        function searchData(type, query) {
+            const url = `https://script.google.com/macros/s/AKfycbyFZc5WqEyenQIrng8dTn2uDs2K59qKNk2YeT0Xkk-nF6TqNLOUjtjMSuIa9Ci-qZkK/exec?action=search&sheetName=${type === 'company' ? 'companies' : 'people'}&query=${query}`;
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        searchResultContainer.style.display = 'block';
+                        formContainer.style.display = 'none';
+                        successMessage.style.display = 'none';
+                        searchResultsList.innerHTML = '';
+                        data.forEach(result => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = result.join(', ');
+                            searchResultsList.appendChild(listItem);
+                        });
+                    } else {
+                        searchResultContainer.style.display = 'none';
+                        formContainer.style.display = 'block';
+                        formHeader.textContent = `Create New ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+                    }
+                });
+        }
 
-// Submit Company or Person Form Data
-function submitFormData(type) {
-    const formData = {};
-    formData.type = type;
-    
-    if (type === 'company') {
-        formData.companyName = document.getElementById("companyName").value;
-        formData.phoneNumber = document.getElementById("phoneNumber").value;
-        formData.street = document.getElementById("street").value;
-        formData.city = document.getElementById("city").value;
-        formData.emirates = document.getElementById("emirates").value;
-        formData.website = document.getElementById("website").value;
-        formData.email = document.getElementById("email").value;
-    } else if (type === 'person') {
-        formData.name = document.getElementById("name").value;
-        formData.companyName = document.getElementById("personCompanyName").value;
-        formData.mobileNumber = document.getElementById("mobileNumber").value;
-        formData.email = document.getElementById("personEmail").value;
-        formData.whatsapp = document.getElementById("whatsapp").value;
-        formData.designation = document.getElementById("designation").value;
-        formData.department = document.getElementById("department").value;
-    }
+        function submitData(sheetName, data) {
+            const url = `https://https://script.google.com/macros/s/AKfycbyFZc5WqEyenQIrng8dTn2uDs2K59qKNk2YeT0Xkk-nF6TqNLOUjtjMSuIa9Ci-qZkK/exec?action=submit&sheetName=${sheetName}&data=${JSON.stringify(data)}`;
+            fetch(url, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Success') {
+                        resetForm();
+                        successMessage.style.display = 'block';
+                        formContainer.style.display = 'none';
+                    }
+                });
+        }
 
-    console.log("Submitting Data to Backend:", formData);
-    sendDataToBackend(formData);
-}
-
-// Submit Activity Form
-function submitActivityForm() {
-    const formData = {
-        type: 'activity',
-        activityType: document.getElementById("activityType").value,
-        date: document.getElementById("date").value,
-        time: document.getElementById("time").value,
-        subject: document.getElementById("subject").value,
-        actionPlan: document.getElementById("actionPlan").value,
-        result: document.getElementById("result").value,
-        followUpDate: document.getElementById("followUpDate").value
-    };
-
-    console.log("Submitting Activity Data to Backend:", formData);
-    sendDataToBackend(formData);
-}
-
-// Send Data to Google Sheets (Backend)
-function sendDataToBackend(formData) {
-    // Make sure to replace the below URL with your actual Apps Script Web App URL
-    const webAppURL = 'https://script.google.com/macros/s/AKfycbyFZc5WqEyenQIrng8dTn2uDs2K59qKNk2YeT0Xkk-nF6TqNLOUjtjMSuIa9Ci-qZkK/exec';
-
-    fetch(webAppURL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Success:", data);
-        // Display success message and reset form
-        document.getElementById("successMessage").classList.add("active");
-        resetAllForms();
-    })
-    .catch((error) => {
-        console.error("Error:", error);
-        alert("There was an error submitting the form. Please try again.");
-    });
-}
-</script>
-
+        function resetForm() {
+            entryForm.reset();
+        }
+    </script>
 
 </body>
 </html>
