@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Page Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .form-page { display: none; }
+        .form-page.active { display: block; }
+        .success-message { color: green; }
+    </style>
+</head>
+<body>
+
+<!-- Page 1: Search and Form Selection -->
+<div id="page1" class="form-page active">
+    <h2>Search and Select Type</h2>
+    <label for="search">Search Existing Data:</label>
+    <input type="text" id="search" placeholder="Enter Company or Person name">
+    <br><br>
+    <label for="selection">Select Form Type:</label>
+    <select id="selection" onchange="handleSelectionChange()">
+        <option value="">Select</option>
+        <option value="company">Company</option>
+        <option value="person">Person</option>
+    </select>
+    <br><br>
+    <button onclick="goToPage2()">Next</button>
+</div>
+
+<!-- Page 2: Company Form -->
+<div id="companyForm" class="form-page">
+    <h2>Company Form</h2>
+    <form id="companyFormData">
+        <label for="companyName">Company Name:</label><input type="text" id="companyName"><br>
+        <label for="phoneNumber">Phone Number:</label><input type="text" id="phoneNumber"><br>
+        <label for="street">Street:</label><input type="text" id="street"><br>
+        <label for="city">City:</label><input type="text" id="city"><br>
+        <label for="emirates">Emirates:</label><input type="text" id="emirates"><br>
+        <label for="website">Website:</label><input type="text" id="website"><br>
+        <label for="email">Email:</label><input type="email" id="email"><br>
+        <button type="button" onclick="submitFormData('company')">Submit</button>
+    </form>
+</div>
+
+<!-- Page 3: Person Form -->
+<div id="personForm" class="form-page">
+    <h2>Person Form</h2>
+    <form id="personFormData">
+        <label for="name">Name:</label><input type="text" id="name"><br>
+        <label for="companyName">Company Name:</label><input type="text" id="personCompanyName"><br>
+        <label for="mobileNumber">Mobile Number:</label><input type="text" id="mobileNumber"><br>
+        <label for="email">Email:</label><input type="email" id="personEmail"><br>
+        <label for="whatsapp">WhatsApp:</label><input type="text" id="whatsapp"><br>
+        <label for="designation">Designation:</label><input type="text" id="designation"><br>
+        <label for="department">Department:</label><input type="text" id="department"><br>
+        <button type="button" onclick="submitFormData('person')">Submit</button>
+    </form>
+</div>
+
+<!-- Page 4: Activity Form -->
+<div id="activityForm" class="form-page">
+    <h2>Activity Form</h2>
+    <form id="activityFormData">
+        <label for="activityType">Activity Type:</label>
+        <select id="activityType">
+            <option value="Call">Call</option>
+            <option value="Email">Email</option>
+            <option value="Site Visit">Site Visit</option>
+            <option value="Office Visit">Office Visit</option>
+            <option value="Meeting">Meeting</option>
+        </select><br>
+        <label for="date">Date:</label><input type="date" id="date"><br>
+        <label for="time">Time:</label><input type="time" id="time"><br>
+        <label for="subject">Subject:</label><input type="text" id="subject"><br>
+        <label for="actionPlan">Action Plan:</label><textarea id="actionPlan"></textarea><br>
+        <label for="result">Result:</label><textarea id="result"></textarea><br>
+        <label for="followUpDate">Follow Up Date:</label><input type="date" id="followUpDate"><br>
+        <button type="button" onclick="submitActivityForm()">Submit</button>
+    </form>
+</div>
+
+<!-- Success Message -->
+<div id="successMessage" class="form-page">
+    <h3 class="success-message">Form submitted successfully!</h3>
+    <button onclick="goToPage1()">Register Another Entry</button>
+</div>
+
+<script>
+// Handle page transitions
+function goToPage1() {
+    resetAllForms();
+    document.getElementById("page1").classList.add("active");
+    document.getElementById("successMessage").classList.remove("active");
+}
+
+function goToPage2() {
+    const selection = document.getElementById("selection").value;
+    if (selection === 'company') {
+        document.getElementById("companyForm").classList.add("active");
+    } else if (selection === 'person') {
+        document.getElementById("personForm").classList.add("active");
+    }
+    document.getElementById("page1").classList.remove("active");
+}
+
+function handleSelectionChange() {
+    const selection = document.getElementById("selection").value;
+    if (selection === 'company') {
+        document.getElementById("companyForm").classList.add("active");
+        document.getElementById("personForm").classList.remove("active");
+    } else if (selection === 'person') {
+        document.getElementById("personForm").classList.add("active");
+        document.getElementById("companyForm").classList.remove("active");
+    }
+}
+
+function resetAllForms() {
+    document.getElementById("companyForm").reset();
+    document.getElementById("personForm").reset();
+    document.getElementById("activityForm").reset();
+    document.getElementById("companyForm").classList.remove("active");
+    document.getElementById("personForm").classList.remove("active");
+    document.getElementById("activityForm").classList.remove("active");
+}
+
+// Submit Company or Person Form Data
+function submitFormData(type) {
+    const formData = {};
+    formData.type = type;
+    
+    if (type === 'company') {
+        formData.companyName = document.getElementById("companyName").value;
+        formData.phoneNumber = document.getElementById("phoneNumber").value;
+        formData.street = document.getElementById("street").value;
+        formData.city = document.getElementById("city").value;
+        formData.emirates = document.getElementById("emirates").value;
+        formData.website = document.getElementById("website").value;
+        formData.email = document.getElementById("email").value;
+    } else if (type === 'person') {
+        formData.name = document.getElementById("name").value;
+        formData.companyName = document.getElementById("personCompanyName").value;
+        formData.mobileNumber = document.getElementById("mobileNumber").value;
+        formData.email = document.getElementById("personEmail").value;
+        formData.whatsapp = document.getElementById("whatsapp").value;
+        formData.designation = document.getElementById("designation").value;
+        formData.department = document.getElementById("department").value;
+    }
+    
+    sendDataToBackend(formData);
+}
+
+function sendDataToBackend(formData) {
+    fetch('https://script.google.com/macros/s/AKfycbxAmWuKLLXDGyF-y-z6L9_DLSkNV3FcXCKJupNKrSU/dev', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("successMessage").classList.add("active");
+        resetAllForms();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Submit Activity Form
+function submitActivityForm() {
+    const formData = {
+        type: 'activity',
+        activityType: document.getElementById("activityType").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        subject: document.getElementById("subject").value,
+        actionPlan: document.getElementById("actionPlan").value,
+        result: document.getElementById("result").value,
+        followUpDate: document.getElementById("followUpDate").value
+    };
+
+    sendDataToBackend(formData);
+}
+</script>
+
+</body>
+</html>
