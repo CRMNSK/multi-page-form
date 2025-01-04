@@ -5,86 +5,265 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Page Form</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .form-page { display: none; }
-        .form-page.active { display: block; }
-        .success-message { color: green; }
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        h2, h3 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-page {
+            display: none;
+        }
+
+        .form-page.active {
+            display: block;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            button {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            label {
+                font-size: 14px;
+            }
+
+            input, select, textarea {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            button {
+                font-size: 15px;
+            }
+        }
+
+        /* Custom Styling for Form Sections */
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .form-section input[type="text"],
+        .form-section input[type="email"],
+        .form-section input[type="date"],
+        .form-section input[type="time"],
+        .form-section textarea {
+            border-radius: 4px;
+        }
+
+        .form-section select {
+            border-radius: 4px;
+        }
+
+        .form-section button {
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
 
-<!-- Page 1: Search and Form Selection -->
-<div id="page1" class="form-page active">
-    <h2>Search and Select Type</h2>
-    <label for="search">Search Existing Data:</label>
-    <input type="text" id="search" placeholder="Enter Company or Person name">
-    <br><br>
-    <label for="selection">Select Form Type:</label>
-    <select id="selection" onchange="handleSelectionChange()">
-        <option value="">Select</option>
-        <option value="company">Company</option>
-        <option value="person">Person</option>
-    </select>
-    <br><br>
-    <button onclick="goToPage2()">Next</button>
-</div>
+<!-- Main Container for Form -->
+<div class="container">
 
-<!-- Page 2: Company Form -->
-<div id="companyForm" class="form-page">
-    <h2>Company Form</h2>
-    <form id="companyFormData">
-        <label for="companyName">Company Name:</label><input type="text" id="companyName"><br>
-        <label for="phoneNumber">Phone Number:</label><input type="text" id="phoneNumber"><br>
-        <label for="street">Street:</label><input type="text" id="street"><br>
-        <label for="city">City:</label><input type="text" id="city"><br>
-        <label for="emirates">Emirates:</label><input type="text" id="emirates"><br>
-        <label for="website">Website:</label><input type="text" id="website"><br>
-        <label for="email">Email:</label><input type="email" id="email"><br>
-        <button type="button" onclick="submitFormData('company')">Submit</button>
-    </form>
-</div>
+    <!-- Page 1: Search and Form Selection -->
+    <div id="page1" class="form-page active">
+        <h2>Search and Select Type</h2>
+        <div class="form-section">
+            <label for="search">Search Existing Data:</label>
+            <input type="text" id="search" placeholder="Enter Company or Person name">
+        </div>
+        <div class="form-section">
+            <label for="selection">Select Form Type:</label>
+            <select id="selection" onchange="handleSelectionChange()">
+                <option value="">Select</option>
+                <option value="company">Company</option>
+                <option value="person">Person</option>
+            </select>
+        </div>
+        <button onclick="goToPage2()">Next</button>
+    </div>
 
-<!-- Page 3: Person Form -->
-<div id="personForm" class="form-page">
-    <h2>Person Form</h2>
-    <form id="personFormData">
-        <label for="name">Name:</label><input type="text" id="name"><br>
-        <label for="companyName">Company Name:</label><input type="text" id="personCompanyName"><br>
-        <label for="mobileNumber">Mobile Number:</label><input type="text" id="mobileNumber"><br>
-        <label for="email">Email:</label><input type="email" id="personEmail"><br>
-        <label for="whatsapp">WhatsApp:</label><input type="text" id="whatsapp"><br>
-        <label for="designation">Designation:</label><input type="text" id="designation"><br>
-        <label for="department">Department:</label><input type="text" id="department"><br>
-        <button type="button" onclick="submitFormData('person')">Submit</button>
-    </form>
-</div>
+    <!-- Page 2: Company Form -->
+    <div id="companyForm" class="form-page">
+        <h2>Company Form</h2>
+        <form id="companyFormData">
+            <div class="form-section">
+                <label for="companyName">Company Name:</label>
+                <input type="text" id="companyName" required>
+            </div>
+            <div class="form-section">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" required>
+            </div>
+            <div class="form-section">
+                <label for="street">Street:</label>
+                <input type="text" id="street" required>
+            </div>
+            <div class="form-section">
+                <label for="city">City:</label>
+                <input type="text" id="city" required>
+            </div>
+            <div class="form-section">
+                <label for="emirates">Emirates:</label>
+                <input type="text" id="emirates" required>
+            </div>
+            <div class="form-section">
+                <label for="website">Website:</label>
+                <input type="text" id="website" required>
+            </div>
+            <div class="form-section">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <button type="button" onclick="submitFormData('company')">Submit</button>
+        </form>
+    </div>
 
-<!-- Page 4: Activity Form -->
-<div id="activityForm" class="form-page">
-    <h2>Activity Form</h2>
-    <form id="activityFormData">
-        <label for="activityType">Activity Type:</label>
-        <select id="activityType">
-            <option value="Call">Call</option>
-            <option value="Email">Email</option>
-            <option value="Site Visit">Site Visit</option>
-            <option value="Office Visit">Office Visit</option>
-            <option value="Meeting">Meeting</option>
-        </select><br>
-        <label for="date">Date:</label><input type="date" id="date"><br>
-        <label for="time">Time:</label><input type="time" id="time"><br>
-        <label for="subject">Subject:</label><input type="text" id="subject"><br>
-        <label for="actionPlan">Action Plan:</label><textarea id="actionPlan"></textarea><br>
-        <label for="result">Result:</label><textarea id="result"></textarea><br>
-        <label for="followUpDate">Follow Up Date:</label><input type="date" id="followUpDate"><br>
-        <button type="button" onclick="submitActivityForm()">Submit</button>
-    </form>
-</div>
+    <!-- Page 3: Person Form -->
+    <div id="personForm" class="form-page">
+        <h2>Person Form</h2>
+        <form id="personFormData">
+            <div class="form-section">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-section">
+                <label for="personCompanyName">Company Name:</label>
+                <input type="text" id="personCompanyName" required>
+            </div>
+            <div class="form-section">
+                <label for="mobileNumber">Mobile Number:</label>
+                <input type="text" id="mobileNumber" required>
+            </div>
+            <div class="form-section">
+                <label for="personEmail">Email:</label>
+                <input type="email" id="personEmail" required>
+            </div>
+            <div class="form-section">
+                <label for="whatsapp">WhatsApp:</label>
+                <input type="text" id="whatsapp" required>
+            </div>
+            <div class="form-section">
+                <label for="designation">Designation:</label>
+                <input type="text" id="designation" required>
+            </div>
+            <div class="form-section">
+                <label for="department">Department:</label>
+                <input type="text" id="department" required>
+            </div>
+            <button type="button" onclick="submitFormData('person')">Submit</button>
+        </form>
+    </div>
 
-<!-- Success Message -->
-<div id="successMessage" class="form-page">
-    <h3 class="success-message">Form submitted successfully!</h3>
-    <button onclick="goToPage1()">Register Another Entry</button>
+    <!-- Page 4: Activity Form -->
+    <div id="activityForm" class="form-page">
+        <h2>Activity Form</h2>
+        <form id="activityFormData">
+            <div class="form-section">
+                <label for="activityType">Activity Type:</label>
+                <select id="activityType" required>
+                    <option value="Call">Call</option>
+                    <option value="Email">Email</option>
+                    <option value="Site Visit">Site Visit</option>
+                    <option value="Office Visit">Office Visit</option>
+                    <option value="Meeting">Meeting</option>
+                </select>
+            </div>
+            <div class="form-section">
+                <label for="date">Date:</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-section">
+                <label for="time">Time:</label>
+                <input type="time" id="time" required>
+            </div>
+            <div class="form-section">
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" required>
+            </div>
+            <div class="form-section">
+                <label for="actionPlan">Action Plan:</label>
+                <textarea id="actionPlan" required></textarea>
+            </div>
+            <div class="form-section">
+                <label for="result">Result:</label>
+                <textarea id="result" required></textarea>
+            </div>
+            <div class="form-section">
+                <label for="followUpDate">Follow Up Date:</label>
+                <input type="date" id="followUpDate" required>
+            </div>
+            <button type="button" onclick="submitActivityForm()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="form-page">
+        <h3 class="success-message">Form submitted successfully!</h3>
+        <button onclick="goToPage1()">Register Another Entry</button>
+    </div>
+
 </div>
 
 <script>
@@ -92,34 +271,23 @@
 function goToPage1() {
     resetAllForms();
     document.getElementById("page1").classList.add("active");
-    document.getElementById("successMessage").classList.remove("active");
 }
 
 function goToPage2() {
     const selection = document.getElementById("selection").value;
-    if (selection === 'company') {
+    if (selection === "company") {
         document.getElementById("companyForm").classList.add("active");
-    } else if (selection === 'person') {
+    } else if (selection === "person") {
         document.getElementById("personForm").classList.add("active");
     }
     document.getElementById("page1").classList.remove("active");
 }
 
-function handleSelectionChange() {
-    const selection = document.getElementById("selection").value;
-    if (selection === 'company') {
-        document.getElementById("companyForm").classList.add("active");
-        document.getElementById("personForm").classList.remove("active");
-    } else if (selection === 'person') {
-        document.getElementById("personForm").classList.add("active");
-        document.getElementById("companyForm").classList.remove("active");
-    }
-}
-
+// Reset all form data
 function resetAllForms() {
-    document.getElementById("companyForm").reset();
-    document.getElementById("personForm").reset();
-    document.getElementById("activityForm").reset();
+    document.getElementById("companyFormData").reset();
+    document.getElementById("personFormData").reset();
+    document.getElementById("activityFormData").reset();
     document.getElementById("companyForm").classList.remove("active");
     document.getElementById("personForm").classList.remove("active");
     document.getElementById("activityForm").classList.remove("active");
@@ -151,22 +319,6 @@ function submitFormData(type) {
     sendDataToBackend(formData);
 }
 
-function sendDataToBackend(formData) {
-    fetch('https://script.google.com/macros/s/AKfycbxAmWuKLLXDGyF-y-z6L9_DLSkNV3FcXCKJupNKrSU/dev', {
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        document.getElementById("successMessage").classList.add("active");
-        resetAllForms();
-    })
-    .catch(error => console.error('Error:', error));
-}
-
 // Submit Activity Form
 function submitActivityForm() {
     const formData = {
@@ -181,6 +333,22 @@ function submitActivityForm() {
     };
 
     sendDataToBackend(formData);
+}
+
+function sendDataToBackend(formData) {
+    fetch('YOUR_GOOGLE_APP_SCRIPT_WEB_APP_URL', {
+        method: 'POST',
+        body: JSON.stringify(formData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("successMessage").classList.add("active");
+        resetAllForms();
+    })
+    .catch(error => console.error('Error:', error));
 }
 </script>
 
