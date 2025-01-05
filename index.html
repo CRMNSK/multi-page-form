@@ -1,292 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Page Form</title>
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Activity Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Basic Styles */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f7fc;
+      margin: 0;
+      padding: 0;
+    }
 
-        h1, h2 {
-            color: #2c3e50;
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        h3 {
-            color: #2c3e50;
-            font-size: 18px;
-        }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+    .form-group {
+      margin-bottom: 15px;
+    }
 
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
+    label {
+      font-weight: bold;
+      color: #333;
+      display: block;
+    }
 
-        .form-container input,
-        .form-container select,
-        .form-container button,
-        .form-container textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
 
-        .form-container button {
-            background-color: #3498db;
-            color: white;
-            cursor: pointer;
-            border: none;
-            font-weight: bold;
-        }
+    textarea {
+      resize: vertical;
+    }
 
-        .form-container button:hover {
-            background-color: #2980b9;
-        }
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
 
-        .form-container label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+    button:hover {
+      background-color: #0056b3;
+    }
 
-        .form-container textarea {
-            resize: vertical;
-            height: 100px;
-        }
+    .error-message {
+      color: red;
+      font-size: 12px;
+      display: none;
+    }
 
-        .form-container input:focus,
-        .form-container select:focus,
-        .form-container textarea:focus {
-            border-color: #3498db;
-            outline: none;
-        }
+    /* Mobile Responsiveness */
+    @media screen and (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
 
-        .form-container .success-message {
-            color: #2ecc71;
-            text-align: center;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        .form-container .search-results ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .form-container .search-results li {
-            padding: 10px;
-            background-color: #ecf0f1;
-            border-radius: 4px;
-            margin-bottom: 5px;
-        }
-
-        .form-container .search-results li:hover {
-            background-color: #bdc3c7;
-            cursor: pointer;
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            h1, h2 {
-                font-size: 20px;
-            }
-
-            .form-container {
-                padding: 15px;
-            }
-
-            .form-container input,
-            .form-container select,
-            .form-container button,
-            .form-container textarea {
-                font-size: 14px;
-                padding: 12px;
-            }
-
-            .form-container .success-message {
-                font-size: 16px;
-            }
-        }
-
-        /* Mobile Friendly */
-        @media (max-width: 480px) {
-            h1, h2 {
-                font-size: 18px;
-            }
-
-            .form-container {
-                padding: 10px;
-            }
-
-            .form-container input,
-            .form-container select,
-            .form-container button,
-            .form-container textarea {
-                font-size: 12px;
-                padding: 10px;
-            }
-        }
-    </style>
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Search or Add Data</h1>
+  <div class="container">
+    <h2>Sales Activity Form</h2>
+    <form id="salesActivityForm">
+      <div class="form-group">
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required>
+        <span class="error-message" id="companyNameError">Company Name is required</span>
+      </div>
 
-        <!-- Search Form -->
-        <div class="form-container">
-            <form id="search-form">
-                <label for="type">Select Type:</label>
-                <select id="type" name="type">
-                    <option value="company">Company</option>
-                    <option value="person">Person</option>
-                </select>
+      <div class="form-group">
+        <label for="activityDate">Date:</label>
+        <input type="date" id="activityDate" name="activityDate" required>
+      </div>
 
-                <label for="search-input">Search:</label>
-                <input type="text" id="search-input" name="query" placeholder="Enter name or company" required>
+      <div class="form-group">
+        <label for="activityType">Activity Type:</label>
+        <select id="activityType" name="activityType" required>
+          <option value="">Select Activity Type</option>
+          <option value="Call">Call</option>
+          <option value="Email">Email</option>
+          <option value="Site Visit">Site Visit</option>
+          <option value="Office Visit">Office Visit</option>
+          <option value="Check Collection">Check Collection</option>
+          <option value="CCM Check">CCM Check</option>
+          <option value="Meeting">Meeting</option>
+        </select>
+      </div>
 
-                <button type="submit">Search</button>
-            </form>
-        </div>
+      <div class="form-group">
+        <label for="timeIn">Time In:</label>
+        <input type="time" id="timeIn" name="timeIn" required>
+      </div>
 
-        <!-- Search Results -->
-        <div id="search-result-container" class="form-container" style="display: none;">
-            <h3>Results:</h3>
-            <div class="search-results">
-                <ul id="search-results-list"></ul>
-            </div>
-            <button id="new-entry-btn">Create New Entry</button>
-        </div>
+      <div class="form-group">
+        <label for="timeOut">Time Out:</label>
+        <input type="time" id="timeOut" name="timeOut" required>
+      </div>
 
-        <!-- Data Entry Form -->
-        <div id="form-container" class="form-container" style="display: none;">
-            <h2 id="form-header"></h2>
-            <form id="entry-form">
-                <input type="hidden" id="form-type" name="type">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+      <div class="form-group">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject">
+      </div>
 
-                <label for="company">Company Name:</label>
-                <input type="text" id="company" name="company">
+      <div class="form-group">
+        <label for="nextAction">Next Action:</label>
+        <textarea id="nextAction" name="nextAction" rows="3" required></textarea>
+      </div>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
+      <div class="form-group">
+        <label for="followUpDate">Follow-Up Date:</label>
+        <input type="date" id="followUpDate" name="followUpDate">
+      </div>
 
-                <label for="phone">Phone:</label>
-                <input type="text" id="phone" name="phone">
+      <div class="form-group">
+        <label for="opportunity">Opportunity:</label>
+        <select id="opportunity" name="opportunity" required>
+          <option value="">Select Opportunity Level</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+          <option value="Not Interested">Not Interested</option>
+        </select>
+      </div>
 
-                <label for="address">Address:</label>
-                <textarea id="address" name="address"></textarea>
+      <div class="form-group">
+        <label for="estRevPotential">Estimated Revenue Potential:</label>
+        <input type="text" id="estRevPotential" name="estRevPotential">
+      </div>
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+      <button type="submit">Submit Activity</button>
+    </form>
+  </div>
 
-        <!-- Success Message -->
-        <div id="success-message" class="form-container" style="display: none;">
-            <p class="success-message">Form submitted successfully!</p>
-        </div>
-    </div>
+  <script>
+    document.getElementById("salesActivityForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
 
-    <script>
-        const formContainer = document.getElementById('form-container');
-        const searchResultContainer = document.getElementById('search-result-container');
-        const searchResultsList = document.getElementById('search-results-list');
-        const successMessage = document.getElementById('success-message');
-        const searchForm = document.getElementById('search-form');
-        const entryForm = document.getElementById('entry-form');
-        const newEntryBtn = document.getElementById('new-entry-btn');
-        const formHeader = document.getElementById('form-header');
-        
-        searchForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const searchQuery = document.getElementById('search-input').value;
-            const selectedType = document.getElementById('type').value;
-            searchData(selectedType, searchQuery);
+      const formData = new FormData(this);
+      const data = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Validate form (check for required fields)
+      let isValid = true;
+      if (!data.companyName) {
+        isValid = false;
+        document.getElementById("companyNameError").style.display = 'block';
+      } else {
+        document.getElementById("companyNameError").style.display = 'none';
+      }
+
+      if (isValid) {
+        // Send data to Google Sheets (use Google Apps Script endpoint)
+        fetch("https://script.google.com/macros/s/AKfycbx1zmXnnfGEUyEeC0midoDgYBnXguDcwPMxKilowp9Vc8C6LUt0rHXLKDtxaikV6kCtig/exec", {
+          method: "POST",
+          body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(result => {
+          alert("Form submitted successfully!");
+          document.getElementById("salesActivityForm").reset();
+        })
+        .catch(error => {
+          alert("Error submitting form");
         });
-
-        newEntryBtn.addEventListener('click', function() {
-            formContainer.style.display = 'block';
-            searchResultContainer.style.display = 'none';
-            formHeader.textContent = 'Enter New Data';
-            document.getElementById('form-type').value = document.getElementById('type').value;
-            resetForm();
-        });
-
-        entryForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(entryForm);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            const sheetName = document.getElementById('form-type').value === 'company' ? 'companies' : 'people';
-            submitData(sheetName, data);
-        });
-
-        function searchData(type, query) {
-            const url = `https://script.google.com/macros/s/AKfycbyFZc5WqEyenQIrng8dTn2uDs2K59qKNk2YeT0Xkk-nF6TqNLOUjtjMSuIa9Ci-qZkK/exec?action=search&sheetName=${type === 'company' ? 'companies' : 'people'}&query=${query}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.length > 0) {
-                        searchResultContainer.style.display = 'block';
-                        formContainer.style.display = 'none';
-                        successMessage.style.display = 'none';
-                        searchResultsList.innerHTML = '';
-                        data.forEach(result => {
-                            const listItem = document.createElement('li');
-                            listItem.textContent = result.join(', ');
-                            searchResultsList.appendChild(listItem);
-                        });
-                    } else {
-                        searchResultContainer.style.display = 'none';
-                        formContainer.style.display = 'block';
-                        formHeader.textContent = `Create New ${type.charAt(0).toUpperCase() + type.slice(1)}`;
-                    }
-                });
-        }
-
-        function submitData(sheetName, data) {
-            const url = `https://https://script.google.com/macros/s/AKfycbyFZc5WqEyenQIrng8dTn2uDs2K59qKNk2YeT0Xkk-nF6TqNLOUjtjMSuIa9Ci-qZkK/exec?action=submit&sheetName=${sheetName}&data=${JSON.stringify(data)}`;
-            fetch(url, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message === 'Success') {
-                        resetForm();
-                        successMessage.style.display = 'block';
-                        formContainer.style.display = 'none';
-                    }
-                });
-        }
-
-        function resetForm() {
-            entryForm.reset();
-        }
-    </script>
+      }
+    });
+  </script>
 
 </body>
 </html>
