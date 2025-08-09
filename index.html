@@ -1,295 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Activity Form</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Basic Styles */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: bold;
-            color: #333;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="time"],
-        input[type="number"],
-        input[type="email"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 6px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 12px;
-            display: none;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .form-col {
-            flex: 1;
-        }
-
-        /* Mobile Responsiveness */
-        @media screen and (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            button {
-                font-size: 14px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sales Activity Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+.form-col {
+    flex: 1;
+}
+.suggestion-box {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 9999;
+}
+.suggestion-box div {
+    padding: 8px;
+    cursor: pointer;
+}
+.suggestion-box div:hover {
+    background-color: #f0f0f0;
+}
+@media screen and (max-width: 600px) {
+    .form-row { flex-direction: column; gap: 0; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>Sales Activity Form</h2>
-        <form id="salesActivityForm">
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="companyName">Company Name:</label>
-                        <input type="text" id="companyName" name="companyName" required>
-                        <span class="error-message" id="companyNameError">Company Name is required</span>
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="contactPerson">Contact Person:</label>
-                        <input type="text" id="contactPerson" name="contactPerson" required>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h2>Sales Activity Form</h2>
+    <form id="salesActivityForm">
+        <div class="form-group" style="position:relative;">
+            <label for="companyName">Company Name:</label>
+            <input type="text" id="companyName" name="companyName" required autocomplete="off">
+            <div id="suggestions" class="suggestion-box"></div>
+            <span class="error-message" id="companyNameError">Company Name is required</span>
+        </div>
+        
+        <!-- Keep your other fields unchanged here -->
+        <!-- Example -->
+        <div class="form-group">
+            <label for="contactPerson">Contact Person:</label>
+            <input type="text" id="contactPerson" name="contactPerson" required>
+        </div>
 
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="contactNo">Contact Number:</label>
-                        <input type="text" id="contactNo" name="contactNo" required>
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="contactEmail">Contact Email:</label>
-                        <input type="email" id="contactEmail" name="contactEmail">
-                    </div>
-                </div>
-            </div>
+        <!-- Add your other fields (contactNo, email, etc.) here just like in your original form -->
 
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="activityDate">Date:</label>
-                        <input type="date" id="activityDate" name="activityDate" required>
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="activityType">Activity Type:</label>
-                        <select id="activityType" name="activityType" required>
-                            <option value="">Select Activity Type</option>
-                            <option value="Call">Call</option>
-                            <option value="Email">Email</option>
-                            <option value="Site Visit">Site Visit</option>
-                            <option value="Office Visit">Office Visit</option>
-                            <option value="Check Collection">Check Collection</option>
-                            <option value="CCM Check">CCM Check</option>
-                            <option value="Meeting">Meeting</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
+        <button type="submit">Submit Activity</button>
+    </form>
+</div>
 
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="timeIn">Time In:</label>
-                        <input type="time" id="timeIn" name="timeIn" required>
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="timeOut">Time Out:</label>
-                        <input type="time" id="timeOut" name="timeOut" required>
-                    </div>
-                </div>
-            </div>
+<script>
+const companyNameInput = document.getElementById("companyName");
+const suggestionBox = document.getElementById("suggestions");
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDHm9TS_Sj6p-6tq3GmVqcH4qFF-NtqGUleGToFV4836cETkZBot6nqKdRT3-JDGItpw/exec"; // Replace with deployed Apps Script URL
 
-            <div class="form-group">
-                <label for="productsPitched">Products Pitched:</label>
-                <textarea id="productsPitched" name="productsPitched" required></textarea>
-            </div>
-
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="pricesOffered">Prices Offered (USD):</label>
-                        <input type="number" id="pricesOffered" name="pricesOffered" step="0.01" min="0">
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="pricesExpected">Prices Expected (USD):</label>
-                        <input type="number" id="pricesExpected" name="pricesExpected" step="0.01" min="0">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="yearlyRP">Yearly Revenue Potential (USD):</label>
-                        <input type="number" id="yearlyRP" name="yearlyRP" step="0.01" min="0">
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="monthlyForecast">Monthly Forecast (USD):</label>
-                        <input type="number" id="monthlyForecast" name="monthlyForecast" step="0.01" min="0">
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="subject">Subject:</label>
-                <input type="text" id="subject" name="subject">
-            </div>
-
-            <div class="form-group">
-                <label for="nextAction">Next Action:</label>
-                <textarea id="nextAction" name="nextAction" rows="3" required></textarea>
-            </div>
-
-            <div class="form-row">
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="followUpDate">Follow-Up Date:</label>
-                        <input type="date" id="followUpDate" name="followUpDate">
-                    </div>
-                </div>
-                <div class="form-col">
-                    <div class="form-group">
-                        <label for="opportunity">Opportunity Level:</label>
-                        <select id="opportunity" name="opportunity" required>
-                            <option value="">Select Opportunity Level</option>
-                            <option value="High">High</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Low">Low</option>
-                            <option value="Not Interested">Not Interested</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit">Submit Activity</button>
-        </form>
-    </div>
-
-    <script>
-        document.getElementById("salesActivityForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            const formData = new FormData(this);
-            const data = {};
-
-            formData.forEach((value, key) => {
-                data[key] = value;
+companyNameInput.addEventListener("input", function () {
+    let query = this.value.trim();
+    if (query.length < 1) {
+        suggestionBox.innerHTML = "";
+        return;
+    }
+    fetch(`${scriptURL}?search=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(customers => {
+            suggestionBox.innerHTML = "";
+            customers.forEach(customer => {
+                let div = document.createElement("div");
+                div.textContent = customer;
+                div.onclick = function () {
+                    companyNameInput.value = customer;
+                    suggestionBox.innerHTML = "";
+                };
+                suggestionBox.appendChild(div);
             });
+        })
+        .catch(err => console.error(err));
+});
 
-            // Validate form (check for required fields)
-            let isValid = true;
-            if (!data.companyName) {
-                isValid = false;
-                document.getElementById("companyNameError").style.display = 'block';
-            } else {
-                document.getElementById("companyNameError").style.display = 'none';
-            }
+document.getElementById("salesActivityForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => data[key] = value);
+    
+    if (!data.companyName) {
+        document.getElementById("companyNameError").style.display = 'block';
+        return;
+    } else {
+        document.getElementById("companyNameError").style.display = 'none';
+    }
 
-            if (isValid) {
-                // Send data to Google Sheets
-                fetch("https://script.google.com/macros/s/AKfycbx1zmXnnfGEUyEeC0midoDgYBnXguDcwPMxKilowp9Vc8C6LUt0rHXLKDtxaikV6kCtig/exec", {
-                    method: "POST",
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(result => {
-                    alert("Form submitted successfully!");
-                    document.getElementById("salesActivityForm").reset();
-                })
-                .catch(error => {
-                    alert("Error submitting form");
-                });
-            }
-        });
-    </script>
+    fetch(scriptURL, {
+        method: "POST",
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(result => {
+        alert("Form submitted successfully!");
+        document.getElementById("salesActivityForm").reset();
+    })
+    .catch(error => {
+        alert("Error submitting form");
+    });
+});
+</script>
 </body>
 </html>
