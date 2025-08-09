@@ -99,21 +99,94 @@ button:hover {
 <div class="container">
     <h2>Sales Activity Form</h2>
     <form id="salesActivityForm">
+        <!-- Company Name with suggestions -->
         <div class="form-group" style="position:relative;">
             <label for="companyName">Company Name:</label>
             <input type="text" id="companyName" name="companyName" required autocomplete="off">
             <div id="suggestions" class="suggestion-box"></div>
             <span class="error-message" id="companyNameError">Company Name is required</span>
         </div>
-        
-        <!-- Keep your other fields unchanged here -->
-        <!-- Example -->
+
         <div class="form-group">
             <label for="contactPerson">Contact Person:</label>
             <input type="text" id="contactPerson" name="contactPerson" required>
         </div>
 
-        <!-- Add your other fields (contactNo, email, etc.) here just like in your original form -->
+        <div class="form-group">
+            <label for="contactNo">Contact No:</label>
+            <input type="text" id="contactNo" name="contactNo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="contactEmail">Contact Email:</label>
+            <input type="email" id="contactEmail" name="contactEmail">
+        </div>
+
+        <div class="form-group">
+            <label for="activityDate">Activity Date:</label>
+            <input type="date" id="activityDate" name="activityDate">
+        </div>
+
+        <div class="form-group">
+            <label for="activityType">Activity Type:</label>
+            <input type="text" id="activityType" name="activityType">
+        </div>
+
+        <div class="form-row">
+            <div class="form-col">
+                <label for="timeIn">Time In:</label>
+                <input type="time" id="timeIn" name="timeIn">
+            </div>
+            <div class="form-col">
+                <label for="timeOut">Time Out:</label>
+                <input type="time" id="timeOut" name="timeOut">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="productsPitched">Products Pitched:</label>
+            <textarea id="productsPitched" name="productsPitched"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="pricesOffered">Prices Offered:</label>
+            <textarea id="pricesOffered" name="pricesOffered"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="pricesExpected">Prices Expected:</label>
+            <textarea id="pricesExpected" name="pricesExpected"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="yearlyRP">Yearly RP:</label>
+            <input type="text" id="yearlyRP" name="yearlyRP">
+        </div>
+
+        <div class="form-group">
+            <label for="monthlyForecast">Monthly Forecast:</label>
+            <input type="text" id="monthlyForecast" name="monthlyForecast">
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject">
+        </div>
+
+        <div class="form-group">
+            <label for="nextAction">Next Action:</label>
+            <textarea id="nextAction" name="nextAction"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="followUpDate">Follow Up Date:</label>
+            <input type="date" id="followUpDate" name="followUpDate">
+        </div>
+
+        <div class="form-group">
+            <label for="opportunity">Opportunity:</label>
+            <textarea id="opportunity" name="opportunity"></textarea>
+        </div>
 
         <button type="submit">Submit Activity</button>
     </form>
@@ -122,7 +195,7 @@ button:hover {
 <script>
 const companyNameInput = document.getElementById("companyName");
 const suggestionBox = document.getElementById("suggestions");
-const scriptURL = "https://script.google.com/macros/s/AKfycbyDHm9TS_Sj6p-6tq3GmVqcH4qFF-NtqGUleGToFV4836cETkZBot6nqKdRT3-JDGItpw/exec"; // Replace with deployed Apps Script URL
+const scriptURL = "YOUR_DEPLOYED_SCRIPT_URL"; // Replace with deployed Apps Script Web App URL
 
 companyNameInput.addEventListener("input", function () {
     let query = this.value.trim();
@@ -166,11 +239,16 @@ document.getElementById("salesActivityForm").addEventListener("submit", function
     })
     .then(response => response.json())
     .then(result => {
-        alert("Form submitted successfully!");
-        document.getElementById("salesActivityForm").reset();
+        if (result.result === "success") {
+            alert("Form submitted successfully!");
+            document.getElementById("salesActivityForm").reset();
+        } else {
+            alert("Error: " + result.message);
+        }
     })
     .catch(error => {
         alert("Error submitting form");
+        console.error(error);
     });
 });
 </script>
